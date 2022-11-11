@@ -96,15 +96,17 @@ export default function AlunoList() {
         //flex: 1
       },
       {
-        field: 'email',
+        //field: 'email',
         headerName: 'E-mail',
-        width: 350
+        width: 350,
+        valueGetter:params => params.row.turma.email
         //flex: 1
       },
       {
-        field: 'turma',
+        //field: 'turma.nome',
         headerName: 'Turma',
         width: 150,
+        valueGetter:params => params.row.turma.nome
         //flex: 1
       }, 
       {
@@ -168,7 +170,7 @@ export default function AlunoList() {
 
     async function fetchData(newState = state) {
         try {
-            const response = await api.get('alunos')
+            const response = await api.get('aluno')
             setState({...newState, data: response.data, isDialogOpen: false})
         }
         catch(erro) {
