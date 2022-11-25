@@ -18,6 +18,8 @@ import ProfessorForm from './routed/ProfessorForm'
 import Sobre from './routed/Sobre'
 import HomePage from './routed/HomePage';
 
+import LoginForm from './routed/LoginForm';
+
 const customTheme = createTheme({
   palette: {
     mode: 'dark',
@@ -50,6 +52,8 @@ function App() {
               <Route path="/aluno" element={<AlunoList />} />
               <Route path="/aluno/novo" element={<AlunoForm />} />
               <Route path="/aluno/:id" element={<AlunoForm />} />
+
+              <Route path='/login' element={<LoginForm/>}/>
 
               <Route path="/professor" element={<ProfessorList />} />
               <Route path="/professor/novo" element={<ProfessorForm />} />
