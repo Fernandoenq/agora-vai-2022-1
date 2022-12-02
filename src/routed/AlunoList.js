@@ -168,6 +168,23 @@ export default function AlunoList() {
       setState({...state, isDialogOpen: true, deleteId: id })
     }
 
+
+    async function fetchData(newState = state) {
+      try {
+          const response = await api.get('aluno').json()
+          setState({...newState, data: response, isDialogOpen: false})
+      }
+      catch(erro) {
+          // Mostrar erro com barra de alerta
+          setState({
+            ...newState,
+            alertMessage: 'ERRO: ' + erro.message,
+            alertSeverity: 'error',
+            isAlertOpen: true
+          })
+      }
+  }
+    /*
     async function fetchData(newState = state) {
         try {
             const response = await api.get('aluno')
@@ -182,7 +199,7 @@ export default function AlunoList() {
               isAlertOpen: true
             })
         }
-    }
+    }*/
 
     React.useEffect(() => {
         fetchData()

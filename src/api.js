@@ -1,4 +1,14 @@
-import axios from 'axios'
+import ky from 'ky'
+
+const api = ky.extend({
+    prefixUrl: 'https://agoravai-fernando.onrender.com',
+    credentials: 'include',
+    timeout: 10000
+})
+
+export default api
+
+/*import axios from 'axios'
 
 const api = axios.create({
     baseURL: 'https://agoravai-fernando.onrender.com',
@@ -8,8 +18,10 @@ const api = axios.create({
     withCredentials: true
     /*headers:{
         'x-access-token': window.sessionStorage.getItem('app-data')
-    }*/
+    }
 
 })
 
 export default api
+*/
+
