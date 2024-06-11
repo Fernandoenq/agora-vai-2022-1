@@ -1,101 +1,79 @@
-/*
-
-    Esta prova consiste em acrescentar um novo componente/página ao projeto Agora Vai.
-
-    1. Copie este arquivo para a pasta src/routed.
-
-    2. Copie o arquivo "languages.jpg" para a pasta src/assets.
-
-    3. Altere o arquivo "Apps.js" e adicione um novo Route, com o valor path="/". Assegure-se de que esse novo Route seja POSICIONADO ANTES de todos os outros. Faça com que o componente HomePage seja carregado pelo novo Route. Dessa forma, o componente será exibido assim que a aplicação for aberta no navegador. 
-
-    4. Usando um título de primeiro nível e parágrafos, coloque o seguinte texto no componente:
-
-        Sobre o projeto Agora Vai
-
-        Agora Vai é um projeto front-end desenvolvido pelo Prof. Fausto Cintra juntamente com a turma do 4º semestre matutino de ADS da Fatec Franca.
-            
-        Seu objetivo é demonstrar as funcionalidades e possibilidades do React em conjunto com a biblioteca de componentes Material UI, acessando uma API REST remota.
-            
-        Clique sobre ícone do menu no canto superior esquerdo para acessar as funcionalidades.
-
-    5. Adicione mais um parágrafo, e, dentro dele, um botão com a cor "secondary" e o texto "Surpresa!".
-    
-    6. Faça as modificações necessárias na tag <img> para que a imagem "languages.jpg" seja exibida.
-
-    7. Aplique as classes de estilo definidas em useStyles nos lugares apropriados. 
-    O título, os parágrafos e o botão deverão ficar alinhados horizontalmente na página.
-
-    8. Crie uma variável de estado chamada "visible", e coloque seu valor inicial como false.
-
-    9. Ao clicar no botão criado no passo 5, a variável "visible" deve inverter seu valor (ou seja, de true para false ou de false para true). A imagem deve alternar entre visível em invisível.
-
-    10. Coloque os arquivos "App.js" e "HomePage.js" em um ZIP para fazer a entrega da prova.
-
-    11. Envie sua prova até 9h20 para ADS4 arroba FAUSTOCINTRA ponto COM ponto BR
-    com o assunto "PROVA 2". Controle o tempo. Não serão aceitos envios após o 
-    horário final.
-
-*/
-
 import React from 'react'
 import { makeStyles } from '@mui/styles'
-import Button from '@mui/material/Button'
-import languages from '../Assets/languages.jpg'
+import nuvem from '../Assets/nuvem.jpg'
+import Stack from '@mui/system/Stack';
+import { styled } from '@mui/system';
+import SearchLocation from '../ui/SearchLocation'
+import BoxResult from '../ui/BoxResult'
 
 const useStyles = makeStyles({
     imagem: {
         display: 'block',
-        margin: '0 auto',
-        transition: 'opacity 1s linear'
+        margin: '0',
+        transition: 'opacity 1s linear',
+        width: '100%',
+        padding: 0
     },
     centralizado: {
         textAlign: 'center'
     },
-
 })
+const stack = {
+    flexGrow: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  };
+
+const Item = styled('div')(({ theme }) => ({
+    textAlign: 'center',  
+    padding: 1,
+    borderRadius: 1,
+    }));
+
 
 export default function HomePage() {
+  
     const classes = useStyles()
 
-    //const visible = false   // Transforme isto em uma variável de estado
-    //const [state, visible] = false
-    const [state, setState] = React.useState(
-        () => ({
-            visible: false,
-            modo: 'visible'
-            
-        })
-    )
-
-    function trocar(){
-        if(state.visible){
-            setState({visible: false, modo:'visible' })
-            
-        }else{
-            setState({visible: true, modo: 'hidden' })
-            
-        }
-    console.log(state.visible) 
-    }
+    const isUserAuthenticated = !!window.sessionStorage.getItem('token');
+    //console.log(isUserAuthenticated)
+    //console.log()
     return (
         <>
-            <img alt="Surpresa" src={languages} className={classes.imagem} style={{visibility: state.modo}}/>
+            <img alt="Nuvens" src={nuvem} className={classes.imagem}/>
             <div className={classes.centralizado}>
 
-                <h1>Sobre o Projeto agora vai</h1>
+            {isUserAuthenticated && <h1>Bem-vindo! Você está autenticado.</h1>}
 
-                <p>Agora Vai é um projeto front-end desenvolvido pelo Prof. Fausto Cintra juntamente com a turma do 4º semestre matutino de ADS da Fatec Franca.</p>
+                <h1>SIMMET</h1>
 
-                <p> Seu objetivo é demonstrar as funcionalidades e possibilidades do React em conjunto com a biblioteca de componentes Material UI, acessando uma API REST remota.</p>
-
-                <p>Clique sobre ícone do menu no canto superior esquerdo para acessar as funcionalidades.</p>
-            
-                <Button color="secondary"  onClick={trocar}>
-                    Surpresa
-                </Button>
+                <p>SIMMET é um projeto de simulação de dados geográficos desenvolvido pela ForjaSolutions.</p>
 
             </div>
 
+        
+            <SearchLocation/>
+
+            <Stack sx={stack}
+            direction={{ xs: 'column', sm: 'row' }}
+            spacing={{ xs: 1, sm: 2, md: 4 }}
+            >
+                <Item><BoxResult instTemperature={20} humidTemperature={20} maxTemperature={22} minTemperature={18} type={"InstTemperature"}/></Item>
+                <Item><BoxResult instHumidity={20} maxHumidity={22} minHumidity={18}  type={"InstHumidity"}/></Item>
+                <Item><BoxResult instDew={20} maxDew={22} mindDew={18} type={"InstDew"}/></Item>
+                <Item><BoxResult instPressure={20} seaLevalPressure={10} maxPressure={22} MinPressure={18} type={"InstPressure"}/></Item>
+            </Stack>
+            <Stack sx={stack}
+            direction={{ xs: 'column', sm: 'row' }}
+            spacing={{ xs: 1, sm: 2, md: 4 }}               
+            >
+                <Item><BoxResult windSpeed={20} windDirection={"Right"} windGust={20} type={"WindSpeed"}/></Item>
+                <Item><BoxResult highClouds={25} lowClouds={15} mediumClouds={20} cloudiness={20} type={"WbCloudyIcon"}/></Item>
+                <Item><BoxResult precipitationValue={"Chuva forte"} type={"Precipitation"}/></Item>
+                <Item><BoxResult visibilityValue={"Muita névoa"} type={"Visibility"}/></Item>
+            </Stack>
+            
             
         </>
     )

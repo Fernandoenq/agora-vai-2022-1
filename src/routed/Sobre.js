@@ -1,32 +1,25 @@
-import React from 'react'
 import eu from '../Assets/eu.jpg'
 import { makeStyles } from '@mui/styles'
-import { useNavigate } from 'react-router-dom'
-import Memande from '../ui/Memande'
+import ButtonMiniInterface from '../Components/ButtonMiniInterface'
+import ConfirmCase from '../Components/ConfirmCase'
+import React, { useState } from 'react';
+import Button from '@mui/material/Button';
 
-const useStyles = makeStyles(theme => ({
-    form: {
-        maxWidth: '90%',
-        margin: '0 auto',
-        display: 'flex',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        '& .MuiFormControl-root': {
-            minWidth: '200px',
-            maxWidth: '500px',
-            marginBottom: '24px'
-        }
-    },
-    Toolbar:{
-        width:'100%',
-        justifyContent: 'space-around'
-    }
-}))
 
 export default function SobreMim(){
-    const classes = useStyles()
 
-    const navigate = useNavigate()
+    const [dialogOpen, setDialogOpen] = useState(false);
+
+  const OpenConfirmCase = () => {
+    setDialogOpen(true);
+  };
+
+  const CloseConfirmCase = (answer) => {
+    // Aqui você pode fazer algo com a resposta, por exemplo, enviar para o servidor, atualizar o estado, etc.
+    console.log("Resposta do diálogo:", answer);
+    setDialogOpen(false);
+  };
+
     return(
         <>
     <h1>Sobre mim</h1>
@@ -59,8 +52,22 @@ export default function SobreMim(){
         </p>
     </div>
 
-    <Memande />
-    
+    <ButtonMiniInterface titulo={"meu contato"} 
+    texto={"<p>Email: fernandoasfilho74@gmail.com <br> Whatssapp: 16 991005074 <br> link profissional: https://linktr.ee/ferdnandalf</p>"}/>
+    <ConfirmCase
+        title="Confirmar Ação"
+        open={dialogOpen}
+        onClose={CloseConfirmCase}
+      />
+
+    <Button onClick={OpenConfirmCase} variant="contained">Abrir Diálogo</Button>
+      <ConfirmCase
+        title="Confirmar Ação"
+        open={dialogOpen}
+        onClose={CloseConfirmCase}
+      >
+        Tem certeza de que deseja realizar esta ação?
+      </ConfirmCase>
     </>
     )
     

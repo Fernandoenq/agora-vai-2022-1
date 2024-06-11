@@ -2,7 +2,6 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import logo from '../Assets/agora-vai-logo.png'
 import MainMenu from './MainMenu'
 import Typography from '@mui/material/Typography'
 import {makeStyles} from '@mui/styles'
@@ -16,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%'
   },
   toolbar:{
-    backgroundColor: theme.palette.background.hover
+    backgroundColor: '#155FA0',
   },
   typog:{
     textAlign: 'center',
@@ -39,7 +38,7 @@ export default function AppFooter() {
         <Toolbar variant="dense" className={classes.toolbar}>
           <Typography variant='caption' className={classes.typog}>
             Desenvolvido com <LocalCafeIcon fontSize="small"/> por <a className={classes.link} href='mailto:fernandoasfilho74@gmail.com'>
-              Fernando Almeida da Siva Filho
+              ForjaSolutions
             </a>
           </Typography>
         </Toolbar>

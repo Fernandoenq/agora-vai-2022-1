@@ -1,17 +1,20 @@
 import * as React from 'react';
-//import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import {Link} from 'react-router-dom'
 import { makeStyles } from '@mui/styles';
+import ChangePage from '../API/functions/changePage'
+
 
 const useStyle = makeStyles(theme => ({
   link:{
     color: theme.palette.text.primary,
     textDecoration: 'none',
     width: '100%'
+  },
+  fundo:{
+    backgroundColor: '#155FA0',
   }
 }))
 
@@ -26,6 +29,7 @@ export default function MainMenu() {
   };
   const handleClose = () => {
     setAnchorEl(null);
+    ChangePage('/Sobre')
   };
 
   return (
@@ -51,62 +55,12 @@ export default function MainMenu() {
         MenuListProps={{
           'aria-labelledby': 'basic-button',
         }}
+        
       >
-
-        <h2>Login</h2>
-        <MenuItem onClick={handleClose}>
-          <Link to="/login" className={classes.link}> 
-            Autenticar-se
-          </Link>
-        </MenuItem>
-        <hr className={classes.link}/>
-        <h2>Alunos</h2>
-        <MenuItem onClick={handleClose}>
-          <Link to="/aluno" className={classes.link}> 
-            Listagem de aluno
-          </Link>
-        </MenuItem>
-
-        <MenuItem onClick={handleClose}>
-          <Link to="/aluno/novo" className={classes.link}>
-            Cadastro de aluno
-          </Link>
-        </MenuItem>
-        
-        <h2>Professores</h2>
-
-        <MenuItem onClick={handleClose}>
-          <Link to="/professor" className={classes.link}>
-            Listagem de professores
-          </Link>
-        </MenuItem>
-
-        <MenuItem onClick={handleClose}>
-          <Link to="/professor/novo" className={classes.link}>
-            Cadastro de professores
-          </Link>
-        </MenuItem>
-
-        <h2>Cursos</h2>
-
-        <MenuItem onClick={handleClose}>
-          <Link to="/cursos" className={classes.link}>
-            Listagem de cursos
-          </Link>
-        </MenuItem>
-        
-        <MenuItem onClick={handleClose}>
-          <Link to="/curso/novo" className={classes.link}>
-            Cadastro de cursos
-          </Link>
-        </MenuItem>
-
         <h2>Site</h2>
 
         <MenuItem onClick={handleClose}>
-          <Link to="/Sobre" className={classes.link}>
             Sobre mim
-          </Link>
         </MenuItem>
       </Menu>
     </div>

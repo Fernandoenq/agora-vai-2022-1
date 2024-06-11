@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
@@ -18,13 +18,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export interface DialogTitleProps {
-  id: string;
-  children?: React.ReactNode;
-  onClose: () => void;
-}
-
-const BootstrapDialogTitle = (props: DialogTitleProps) => {
+const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props;
 
   return (
@@ -48,8 +42,10 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
   );
 };
 
-export default function Memande() {
-  const [open, setOpen] = React.useState(false);
+export default function ButtonMiniInterface(props) {
+  const titulo = props.titulo
+  const texto = props.texto
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -69,18 +65,10 @@ export default function Memande() {
         open={open}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          meu contato
+          {titulo}
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <Typography gutterBottom>
-            Email: fernandoasfilho74@gmail.com
-          </Typography>
-          <Typography gutterBottom>
-            Whatssapp: 16 991005074
-          </Typography>
-          <Typography gutterBottom>
-            link profissional: https://linktr.ee/ferdnandalf
-          </Typography>
+        <Typography gutterBottom dangerouslySetInnerHTML={{ __html: texto }} />
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>

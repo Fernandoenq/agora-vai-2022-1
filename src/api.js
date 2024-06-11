@@ -1,7 +1,8 @@
 import ky from 'ky'
 
 const api = ky.extend({
-    prefixUrl: 'https://agoravai-fernando.onrender.com',
+    //prefixUrl: 'https://agoravai-fernando.onrender.com',
+    prefixUrl: 'http://127.0.0.1:5000/',
     credentials: 'include',
     timeout: 10000
 })

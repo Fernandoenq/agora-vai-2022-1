@@ -6,11 +6,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function ConfirmDialog({title, children, open = false, onClose}) {
+export default function ConfirmCase({title, children, open = false, onClose}) {
 
   const handleClose = answer => {
-    // answer === true: resposta positiva à pergunta
-    // answer === false: resposta negativa à pergunta 
     onClose(answer);
   };
 
